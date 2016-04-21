@@ -28,10 +28,10 @@ public class FileLogger implements Consumer<Log> {
 	public void accept(Log log) {
 
 		if(!file.exists()) {
-			file.mkdirs();
+			//file.mkdirs();
 			tryCrash(() -> file.createNewFile());
 		}
 
-		tryCrash(() -> Files.write(Paths.get(file.toURI()), log.toString().getBytes(), StandardOpenOption.APPEND));
+		tryCrash(() -> Files.write(Paths.get(file.toURI()), (log.toString() + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND));
 	}
 }
