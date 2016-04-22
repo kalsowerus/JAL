@@ -6,11 +6,18 @@ import java.util.function.Consumer;
 
 public class JALogger implements Logger {
 
+	private LogLevel logLevel;
 	private List<Consumer<Log>> listeners;
+	
+	public JALogger(LogLevel logLevel) {
+		
+		this.logLevel = logLevel;
+		listeners = new ArrayList<>();
+	}
 
 	public JALogger() {
 
-		listeners = new ArrayList<>();
+		this(LogLevel.DEBUG);
 	}
 
 	public void addListener(Consumer<Log> listener) {
@@ -26,6 +33,9 @@ public class JALogger implements Logger {
 	@Override
 	public void log(LogLevel logLevel, String message, String tag) {
 
+		if(logLevel.getLevel() < this.logLevel.getLevel())
+			return;
+		
 		Log log = new Log(logLevel, message, tag);
 		listeners.stream().forEach(listener -> listener.accept(log));
 	}
