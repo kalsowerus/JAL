@@ -28,7 +28,7 @@ public class FileLogger implements Consumer<Log> {
 	public void accept(Log log) {
 
 		if(!file.exists()) {
-			//file.mkdirs();
+			file.getParentFile().mkdirs();
 			tryCrash(() -> file.createNewFile());
 		}
 
