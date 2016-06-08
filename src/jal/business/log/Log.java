@@ -4,6 +4,11 @@ import java.util.Date;
 
 import org.json.JSONObject;
 
+/**
+ * A class that represents a log sent to a {@link jal.business.log.JALogger}.
+ * 
+ * @author Roy
+ */
 public final class Log {
 
 	private static final String timestamp_field = "timestamp";
@@ -23,28 +28,64 @@ public final class Log {
         this.message = message;
         this.tag = tag;
     }
-
+    
+    /**
+     * Creates a log with a certain log level, message and tag.
+     * 
+     * @param logLevel the log level.
+     * @param message the message.
+     * @param tag the tag.
+     */
     public Log(LogLevel logLevel, String message, String tag) {
 
     	this(new Date(), logLevel, message, tag);
     }
 
+    /**
+     * Gets the log level.
+     * 
+     * @return the log level.
+     */
     public LogLevel getLogLevel() {
         return logLevel;
     }
 
+    /**
+     * Gets the time stamp.
+     * 
+     * @return the time stamp.
+     */
     public Date getTimeStamp() {
         return timestamp;
     }
-
+    
+    /**
+     * gets the message.
+     * 
+     * @return the message.
+     */
     public String getMessage() {
         return message;
     }
-
+    
+    /**
+     * Gets the tag.
+     * 
+     * @return the tag.
+     */
     public String getTag() {
         return tag;
     }
-
+    
+    /**
+     * Creates a log by parsing a JSON object.
+     * 
+     * @param json the JSON object to parse.
+     * 
+     * @return the parsed log.
+     * 
+     * @see #toJSON()
+     */
     public static Log from(JSONObject json) {
 
     	Date timestamp = new Date(json.getLong(timestamp_field));
@@ -54,7 +95,14 @@ public final class Log {
 
     	return new Log(timestamp, logLevel, message, tag);
     }
-
+    
+    /**
+     * Converts this log into a JSON object.
+     * 
+     * @return the log as a JSON object.
+     * 
+     * @see #from(JSONObject)
+     */
     public JSONObject toJSON() {
 
     	JSONObject json = new JSONObject();
@@ -65,7 +113,12 @@ public final class Log {
 
     	return json;
     }
-
+    
+    /**
+     * Converts this log into a String fit for being printed or otherwise shown to a technical user.
+     * 
+     * @return the String representation of this log.
+     */
     @Override
     public String toString() {
 

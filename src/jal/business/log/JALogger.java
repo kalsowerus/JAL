@@ -4,27 +4,54 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * A class that accepts logs and passes them on to listeners.
+ * Use {@link #addListener(Consumer)} to register as a listener.
+ * 
+ * @author Roy
+ * 
+ * @see jal.business.log.Log
+ * @see jal.business.log.Logger
+ */
 public class JALogger implements Logger {
 
 	private LogLevel logLevel;
 	private List<Consumer<Log>> listeners;
 	
+	/**
+	 * Initializes the Logger with a certain log level.
+	 * 
+	 * @param logLevel defines which log levels get logged.
+	 */
 	public JALogger(LogLevel logLevel) {
 		
 		this.logLevel = logLevel;
 		listeners = new ArrayList<>();
 	}
 
+	/**
+	 * Initializes the Logger with the log level debug.
+	 */
 	public JALogger() {
 
 		this(LogLevel.DEBUG);
 	}
-
+	
+	/**
+	 * Add a listener, this listener will receive a Log object for every log that is made on this JALogger.
+	 * 
+	 * @param listener the listener to add.
+	 */
 	public void addListener(Consumer<Log> listener) {
 
 		listeners.add(listener);
 	}
 
+	/**
+	 * Remove a listener, this listener will no longer receive a Log object for every log that is made on this JALogger.
+	 * 
+	 * @param listener the listener to remove.
+	 */
 	public void removeListener(Consumer<Log> listener) {
 
 		listeners.remove(listener);
