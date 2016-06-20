@@ -29,18 +29,39 @@ public enum LogLevel {
 
 	private int level;
 	
-	/**
-	 * Gets a integer representing the log level.
-	 * 
-	 * @param level the integer representing the log level.
-	 */
+	
 	private LogLevel(int level) {
 
 		this.level = level;
 	}
-
+	
+	/**
+	 * Gets a integer representing the log level.
+	 * 
+	 * @return the integer representing the log level.
+	 */
 	public int getLevel() {
 
 		return level;
+	}
+	
+	/**
+	 * Creates a LogLevel with a specified level
+	 * 
+	 * @param level the level
+	 * 
+	 * @return the LogLevel
+	 */
+	public static LogLevel withLevel(int level) {
+		switch (level) {
+		case 0:
+			return LogLevel.DEBUG;
+		case 1:
+			return LogLevel.INFO;
+		case 2:
+			return LogLevel.WARNING;
+		default:
+			return LogLevel.ERROR;
+		}
 	}
 }
