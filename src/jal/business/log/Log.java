@@ -106,7 +106,7 @@ public final class Log {
     public JSONObject toJSON() {
 
     	JSONObject json = new JSONObject();
-    	json.put(timestamp_field, timestamp);
+    	json.put(timestamp_field, timestamp.getTime());
     	json.put(logLevel_field, logLevel.name());
     	json.put(message_field, message);
     	json.put(tag_field, tag);
