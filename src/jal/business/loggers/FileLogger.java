@@ -47,6 +47,6 @@ public class FileLogger implements Consumer<Log> {
 			tryCrash(() -> file.createNewFile());
 		}
 
-		tryCrash(() -> Files.write(Paths.get(file.toURI()), (log.toString() + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND));
+		tryCatch(() -> Files.write(Paths.get(file.toURI()), (log.toString() + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND));
 	}
 }
