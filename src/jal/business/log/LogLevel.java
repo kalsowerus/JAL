@@ -64,4 +64,17 @@ public enum LogLevel {
 			return LogLevel.ERROR;
 		}
 	}
+	
+	public static LogLevel fromString(String level) {
+		if ("DEBUG".equals(level)) {
+			return LogLevel.DEBUG;
+		} else if ("INFO".equals(level)) {
+			return LogLevel.INFO;
+		} else if ("WARNING".equals(level)) {
+			return LogLevel.WARNING;
+		} else if ("ERROR".equals(level)) {
+			return LogLevel.ERROR;
+		}
+		return LogLevel.DEBUG;
+	}
 }
