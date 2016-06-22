@@ -44,7 +44,9 @@ public class JALogger implements Logger {
 	 */
 	public void addListener(Consumer<Log> listener) {
 
-		listeners.add(listener);
+		synchronized(listeners) {
+			listeners.add(listener);
+		}
 	}
 
 	/**
@@ -54,7 +56,9 @@ public class JALogger implements Logger {
 	 */
 	public void removeListener(Consumer<Log> listener) {
 
-		listeners.remove(listener);
+		synchronized(listeners) {
+			listeners.remove(listener);
+		}
 	}
 
 	@Override
@@ -64,7 +68,9 @@ public class JALogger implements Logger {
 			return;
 		
 		Log log = new Log(logLevel, message, tag);
-		listeners.stream().forEach(listener -> listener.accept(log));
+		synchronized(listeners) {
+			listeners.stream().forEach(listener -> listener.accept(log));
+		}
 	}
 
 	@Override
